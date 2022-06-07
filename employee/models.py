@@ -1,5 +1,18 @@
+from unicodedata import category
 from django.db import models
 from ckeditor.fields import RichTextField
+
+class Category(models.Model):
+    name = models.CharField('Категория', max_length=255, null=True, blank=True)
+        
+    class Meta:
+        db_table = ''
+        managed = True
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+    
+    def __str__(self):
+        return self.name
 
 class Position(models.Model):
     name = models.CharField('Должность', max_length=255)
@@ -41,11 +54,27 @@ class PastWork(models.Model):
         verbose_name = 'Последнее место работы'
         verbose_name_plural = 'Последнее место работы'
     
+class TimeTable(models.Model):
+    city = models.CharField('Город или район', max_length=255)
+    place = models.TextField('Расписание, место')
+    employee = models.ForeignKey('Employees', on_delete=models.CASCADE, verbose_name='Депутат')
+    
+    def __str__(self):
+        return f'{self.city} - {self.employee}'
+    
+    class Meta:
+        db_table = ''
+        managed = True
+        verbose_name = 'График приема граждан'
+        verbose_name_plural = 'График приема граждан'
+    
+
 class Employees(models.Model):
     image = models.ImageField(verbose_name='Фотография', upload_to='employees/')
     fio = models.CharField('ФИО', max_length=255)
     email = models.EmailField('Почта', unique=True, blank=True, null=True)
     phone = models.CharField('Номер телефона', max_length=255, null=True,blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,verbose_name='Категория', related_name='employee_category')
     position = models.ManyToManyField(Position, verbose_name='Должность', related_name='employee_position')
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE, verbose_name='Нация')
     birth_date = models.DateField(auto_created=False, verbose_name='Дата рождения')

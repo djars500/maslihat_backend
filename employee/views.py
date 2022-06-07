@@ -1,21 +1,24 @@
-import imp
-from django.shortcuts import render
-from rest_framework import generics
-from .serializers import EmployeesSerializers
-from .models import Employees, Nation
+from rest_framework import generics,viewsets
+from .serializers import CategorySerializer, EmployeesSerializers
+from .models import Category, Employees
+from rest_framework.response import Response
 
-class EmployeesListAPIView(generics.ListAPIView):
+
+class EmployeesModelViewSet(viewsets.ModelViewSet):
     
     queryset = Employees.objects.all()
     serializer_class = EmployeesSerializers
     
-class EmployeeRetrieveAPIView(generics.RetrieveAPIView):
-    queryset = Employees.objects.all()
-    serializer_class = EmployeesSerializers
+class EmployeeCategoryAPIView(generics.RetrieveAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    
+    def get(self, request, *args, **kwargs):
+        instanse = self.get_object()
+        data = Employees.objects.filter(category=instanse)
+        serializer = EmployeesSerializers(data, many=True)
+        return Response(serializer.data)
     
 
-# class NationListAPIView(generics.ListAPIView):
-    
-#     queryset = Nation.objects.all()
-#     serializer_class = NationSerializer
+
     

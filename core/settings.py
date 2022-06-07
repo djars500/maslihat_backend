@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'modeltranslation',
     'django.contrib.admin',
+    'drf_multiple_model',
     'main',
     'employee',
     'session',

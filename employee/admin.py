@@ -1,33 +1,33 @@
 from django.contrib import admin
 from .models import *
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from django import forms
+from .forms import *
 
 class PastWorkTabularInline(admin.TabularInline):
     model = PastWork
-
-class EmployeeAdminForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorUploadingWidget())
-    class Meta:
-        model = Employees
-        exclude = ('birth_place_ru','content_ru','edu_end_ru', 'edu_place_ru', 'edu_speciality_ru','edu_degree_ru', 'awards_ru', 'party_affiliation_ru', 'content_ru')
+    extra = 2
+    
+class TimeTableTabularInline(admin.TabularInline):
+    model = TimeTable
+    extra = 1
 
 class EmployeeAdmin(admin.ModelAdmin):
     inlines = [
-        PastWorkTabularInline
+        PastWorkTabularInline,
+        TimeTableTabularInline
     ]
     form = EmployeeAdminForm
     
-class PastWorkAdminForm(forms.ModelForm):
-    class Meta:
-        model = PastWork
-        exclude = ('position_ru',)
-
-class PastWorkAdmin(admin.ModelAdmin):
-    
+class PastWorkAdmin(admin.ModelAdmin):  
     form = PastWorkAdminForm
+    
+class CategoryAdmin(admin.ModelAdmin): 
+    form = CategoryAdminForm
+    
+
 
 admin.site.register(Employees,EmployeeAdmin)
 admin.site.register(Position)
+admin.site.register(TimeTable)
 admin.site.register(Nation)
+admin.site.register(Category,CategoryAdmin)
 admin.site.register(PastWork,PastWorkAdmin)

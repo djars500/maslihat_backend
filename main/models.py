@@ -36,4 +36,30 @@ class Anons(models.Model):
     def __str__(self):
         return self.title
     
+class Section(models.Model):
+    name = models.CharField('Какой квартал', max_length=255)
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        db_table = ''
+        managed = True
+        verbose_name = 'Квартал'
+        verbose_name_plural = 'Кварталы'
+    
+class Plan(models.Model):
+    desc = models.TextField('Описание')
+    commission = models.TextField('Коммисия')
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name='plan_section')
+    
+    def __str__(self):
+        return self.desc
+    
+    class Meta:
+        db_table = ''
+        managed = True
+        verbose_name = 'План'
+        verbose_name_plural = 'План'
+    
     

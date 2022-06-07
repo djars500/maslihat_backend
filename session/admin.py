@@ -15,7 +15,7 @@ class SolutionAdmin(admin.ModelAdmin):
 class MaslihatSolutionForm(forms.ModelForm):
     class Meta:
         model = MaslihatSolution
-        fields = ('title_ru',)         
+        exclude = ('title_ru',)         
         
 class MaslihatSolutionAdmin(admin.ModelAdmin):
     form = MaslihatSolutionForm
