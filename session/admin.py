@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MaslihatSolution, Solutions
+from .models import MaslihatSolution, Solutions,CategoryContent
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
@@ -21,6 +21,6 @@ class MaslihatSolutionAdmin(admin.ModelAdmin):
     form = MaslihatSolutionForm
 
 
-
+admin.site.register(CategoryContent)
 admin.site.register(Solutions, SolutionAdmin)
 admin.site.register(MaslihatSolution, MaslihatSolutionAdmin)

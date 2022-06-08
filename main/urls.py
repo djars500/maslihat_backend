@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import AnonsModelViewSet, NewsModelViewSet , PlanModelViewSet
-from employee.views import  EmployeeCategoryAPIView, EmployeesModelViewSet
+from .views import AnonsModelViewSet, NewsModelViewSet , PlanModelViewSet, TextAPIView
+from employee.views import  EmployeeCategoryAPIView, EmployeesModelViewSet, TimeTableListAPIView
 from session.views import MaslihatSolutionModelViewSet, SolutionsModelViewSet
 urlpatterns = [
-    
+    path('', TextAPIView.as_view()),
     
     path('anons/', AnonsModelViewSet.as_view({'get': 'list'})),
     path('anons/<int:pk>', AnonsModelViewSet.as_view({'get': 'retrieve'})),
@@ -15,6 +15,7 @@ urlpatterns = [
     path('employees/', EmployeesModelViewSet.as_view({'get': 'list'})),
     path('employees/<int:pk>', EmployeesModelViewSet.as_view({'get': 'retrieve'})),
     path('employees/category/<int:pk>', EmployeeCategoryAPIView.as_view()),
+    path('timetable/', TimeTableListAPIView.as_view()),
     
     path('maslihat_solution/', MaslihatSolutionModelViewSet.as_view({'get': 'list'})),
     path('solution/', SolutionsModelViewSet.as_view({'get': 'list'})),

@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import News, Anons, Section, Plan
 from .forms import *
 
@@ -21,7 +22,6 @@ class SectionAdmin(admin.ModelAdmin):
         PlanTabularInline
     ]
     form = SectionAdminForm
-    
     
 admin.site.register(Plan,PlanAdmin)
 admin.site.register(Section,SectionAdmin)

@@ -23,6 +23,7 @@ class PastWorkSerializer(serializers.ModelSerializer):
         exclude = ('position_ru',)
         
 class TimeTableSerializer(serializers.ModelSerializer): 
+    employee = serializers.CharField(source='employee.position.name')
     class Meta:
         model = TimeTable
         fields = ('id','city','place','employee')

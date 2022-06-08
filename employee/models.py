@@ -75,7 +75,7 @@ class Employees(models.Model):
     email = models.EmailField('Почта', unique=True, blank=True, null=True)
     phone = models.CharField('Номер телефона', max_length=255, null=True,blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,verbose_name='Категория', related_name='employee_category')
-    position = models.ManyToManyField(Position, verbose_name='Должность', related_name='employee_position')
+    position = models.ForeignKey(Position, verbose_name='Должность', related_name='employee_position', on_delete=models.CASCADE, null=True, blank=True)
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE, verbose_name='Нация')
     birth_date = models.DateField(auto_created=False, verbose_name='Дата рождения')
     birth_place = models.CharField('Место рождения', max_length=255, null=True,blank=True)

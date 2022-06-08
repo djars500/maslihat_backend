@@ -9,7 +9,7 @@ from ckeditor.fields import RichTextField
 class News(models.Model):
     title = models.CharField('Название', max_length=255)
     content = RichTextField()
-    date = models.DateField('Дата', auto_now_add=True, null=True, blank=True)
+    date = models.DateField('Дата', auto_now_add=False, null=True, blank=True)
     image = models.ImageField('Фото', upload_to='news/')
     
     class Meta:
@@ -24,7 +24,7 @@ class News(models.Model):
 class Anons(models.Model):
     title = models.CharField('Название', max_length=255,null=True, blank=True)
     content = RichTextField()
-    date = models.DateField('Дата', auto_now_add=True, null=True, blank=True)
+    date = models.DateField('Дата', auto_now_add=False, null=True, blank=True)
     image = models.ImageField('Фото', upload_to='anons/')
     
     class Meta:

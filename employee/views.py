@@ -1,6 +1,6 @@
 from rest_framework import generics,viewsets
-from .serializers import CategorySerializer, EmployeesSerializers
-from .models import Category, Employees
+from .serializers import CategorySerializer, EmployeesSerializers, TimeTableSerializer
+from .models import Category, Employees, TimeTable
 from rest_framework.response import Response
 
 
@@ -19,6 +19,9 @@ class EmployeeCategoryAPIView(generics.RetrieveAPIView):
         serializer = EmployeesSerializers(data, many=True)
         return Response(serializer.data)
     
+class TimeTableListAPIView(generics.ListAPIView):
+    queryset = TimeTable.objects.all()
+    serializer_class = TimeTableSerializer
 
 
     
