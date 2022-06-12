@@ -35,7 +35,8 @@ class EmployeesSerializers(serializers.ModelSerializer):
     category_kk = serializers.CharField(source='category.name_kk')
     category = serializers.CharField(source='category.name')
     nation = serializers.CharField(source='nation.name')
-    position = PositionSerializer(many=True)
+    position = serializers.CharField(source='position.name')
+    position_kk = serializers.CharField(source='position.name_kk')
     languages = NationSerializer(many=True)
     class Meta:
         model = Employees
