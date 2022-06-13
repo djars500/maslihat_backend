@@ -1,3 +1,4 @@
+from multiprocessing import context
 from rest_framework.response import Response
 from .serializers import AnonsSerializers, NewsSerializers, PlanSerializers
 from .models import Anons, News, Plan
@@ -27,9 +28,11 @@ class TextAPIView(generics.ListAPIView):
     def get(self, request, *args, **kwargs):
         
         anons = Anons.objects.all().order_by('id')[:5]
-        anons_data = AnonsSerializers(anons, many=True)
+        anons_data = AnonsSerializers(anons, many=True,context={
+            'request': request
+        })
         news = News.objects.all().order_by('id')[:5]
-        news_data = NewsSerializers(news, many=True)
+        news_data = NewsSerializers(news, many=True, context={'request': request})
         employees = Employees.objects.all().order_by('id')[:5]
         employees_data = EmployeesSerializers(employees, many=True, context={
             'request': request
