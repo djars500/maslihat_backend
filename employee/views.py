@@ -8,6 +8,9 @@ class EmployeesModelViewSet(viewsets.ModelViewSet):
     
     queryset = Employees.objects.all()
     serializer_class = EmployeesSerializers
+
+    
+    
     
 class EmployeeCategoryAPIView(generics.RetrieveAPIView):
     queryset = Category.objects.all()
@@ -16,7 +19,7 @@ class EmployeeCategoryAPIView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         instanse = self.get_object()
         data = Employees.objects.filter(category=instanse)
-        serializer = EmployeesSerializers(data, many=True)
+        serializer = EmployeesSerializers(data, many=True, context={'request': request})
         return Response(serializer.data)
     
 class TimeTableListAPIView(generics.ListAPIView):

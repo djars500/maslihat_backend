@@ -31,9 +31,14 @@ class TextAPIView(generics.ListAPIView):
         news = News.objects.all().order_by('id')[:5]
         news_data = NewsSerializers(news, many=True)
         employees = Employees.objects.all().order_by('id')[:5]
-        employees_data = EmployeesSerializers(employees, many=True)
+        employees_data = EmployeesSerializers(employees, many=True, context={
+            'request': request
+        })
         return Response({
            'anons': anons_data.data,
            'news': news_data.data,
            'employees': employees_data.data
-        })
+        },
+        )
+        
+    

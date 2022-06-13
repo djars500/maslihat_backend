@@ -4,12 +4,12 @@ from .models import Anons, News, Plan, Section
 class AnonsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Anons
-        fields = ('id','title', 'title_kk', 'content','content_kk', 'date')
+        fields = ('id','title', 'title_kk', 'content','content_kk', 'date', 'image')
         
 class NewsSerializers(serializers.ModelSerializer):
     class Meta:
         model = News
-        fields = ('id','title','title_kk', 'content','content_kk', 'date')
+        fields = ('id','title','title_kk', 'content','content_kk', 'date', 'image')
         
 class SectionSerializers(serializers.ModelSerializer):
     class Meta:
