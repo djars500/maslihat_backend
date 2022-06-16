@@ -11,14 +11,13 @@ class NewsSerializers(serializers.ModelSerializer):
         model = News
         fields = ('id','title','title_kk', 'content','content_kk', 'date', 'image')
         
-class SectionSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Section
-        exclude = ('name_ru',)
-        
 class PlanSerializers(serializers.ModelSerializer):
-    section_ru = serializers.CharField(source='section.name_ru')
-    section_kk = serializers.CharField(source='section.name_kk')
     class Meta:
         model = Plan
-        exclude = ('desc_ru','commission_ru',)
+        fields = ('__all__')
+        
+class SectionSerializers(serializers.ModelSerializer):
+    plan_section = PlanSerializers(many=True)
+    class Meta:
+        model = Section
+        fields = ('name','name_kk', 'plan_section')

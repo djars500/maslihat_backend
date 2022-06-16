@@ -1,7 +1,7 @@
 from multiprocessing import context
 from rest_framework.response import Response
-from .serializers import AnonsSerializers, NewsSerializers, PlanSerializers
-from .models import Anons, News, Plan
+from .serializers import AnonsSerializers, NewsSerializers, PlanSerializers, SectionSerializers
+from .models import Anons, News, Plan, Section
 from rest_framework import viewsets, generics
 from drf_multiple_model.views import ObjectMultipleModelAPIView, FlatMultipleModelAPIView
 from employee.serializers import EmployeesSerializers
@@ -17,8 +17,8 @@ class NewsModelViewSet(viewsets.ModelViewSet):
     serializer_class = NewsSerializers
       
 class PlanModelViewSet(viewsets.ModelViewSet):
-    queryset = Plan.objects.all()
-    serializer_class = PlanSerializers
+    queryset = Section.objects.all()
+    serializer_class = SectionSerializers
 
 
 class TextAPIView(generics.ListAPIView):
