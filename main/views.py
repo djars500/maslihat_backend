@@ -38,9 +38,11 @@ class TextAPIView(generics.ListAPIView):
             'request': request
         })
         return Response({
+        
            'anons': anons_data.data,
            'news': news_data.data,
-           'employees': employees_data.data
+           'employees': employees_data.data,
+          
         },
         )
         
