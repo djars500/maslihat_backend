@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AnonsModelViewSet, NewsModelViewSet , PlanModelViewSet, TextAPIView
+from .views import AnonsModelViewSet, NewsModelViewSet , PlanModelViewSet, TextAPIView, MessageCreateAPIView
 from employee.views import  EmployeeCategoryAPIView, EmployeesModelViewSet, TimeTableListAPIView
 from session.views import CategoryContentRetrieveAPIView, MaslihatSolutionModelViewSet, SolutionsModelViewSet, FilesCategoryRetrieveAPIView
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
     path('news/<int:pk>', NewsModelViewSet.as_view({'get': 'retrieve'})),
     path('plan/', PlanModelViewSet.as_view({'get': 'list'})),
     path('plan/<int:pk>', PlanModelViewSet.as_view({'get': 'retrieve'})),
+    path('message/', MessageCreateAPIView.as_view()),
     
     path('employees/', EmployeesModelViewSet.as_view({'get': 'list'})),
     path('employees/<int:pk>', EmployeesModelViewSet.as_view({'get': 'retrieve'})),

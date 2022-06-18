@@ -1,7 +1,7 @@
-from multiprocessing import context
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from .serializers import AnonsSerializers, NewsSerializers, PlanSerializers, SectionSerializers
-from .models import Anons, News, Plan, Section
+from .serializers import AnonsSerializers, MesssageSerializers, NewsSerializers, PlanSerializers, SectionSerializers
+from .models import Anons, News, Plan, Section, Messsage
 from rest_framework import viewsets, generics
 from drf_multiple_model.views import ObjectMultipleModelAPIView, FlatMultipleModelAPIView
 from employee.serializers import EmployeesSerializers
@@ -19,6 +19,11 @@ class NewsModelViewSet(viewsets.ModelViewSet):
 class PlanModelViewSet(viewsets.ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializers
+    
+class MessageCreateAPIView(generics.CreateAPIView):
+    queryset = Messsage.objects.all()
+    serializer_class = MesssageSerializers
+    permission_classes = (AllowAny,)
 
 
 class TextAPIView(generics.ListAPIView):

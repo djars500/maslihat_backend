@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Anons, News, Plan, Section
+from .models import Anons, News, Plan, Section, Messsage
 
 class AnonsSerializers(serializers.ModelSerializer):
     class Meta:
@@ -21,3 +21,8 @@ class SectionSerializers(serializers.ModelSerializer):
     class Meta:
         model = Section
         fields = ('name','name_kk', 'plan_section')
+        
+class MesssageSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Messsage
+        fields = ('__all__')
